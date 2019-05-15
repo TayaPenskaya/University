@@ -19,55 +19,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Implementor implements Impler, JarImpler {
-    @Override
-    public void implement(Class<?> aClass, Path path) throws ImplerException {
-        if (aClass.isPrimitive() || aClass.isArray() || aClass == Enum.class || Modifier.isFinal(aClass.getModifiers())) {
-            throw new ImplerException("It isn't a class or interface!");
-        }
-        path = getFilePath(path, aClass);
-        createDirectories(path);
-        try (var writer = Files.newBufferedWriter(path)) {
-            writePackage(aClass, writer);
-            writeClassFullName(aClass, writer);
-            if (!aClass.isInterface()) {
-                writeConstructors(aClass, writer);
-            }
-            writeMethods(aClass, writer);
-            writer.write(RIGHT_BRACE + COMMA);
-        } catch (IOException e) {
-            throw new ImplerException("Can't write implementation for this class!");
-        }
-
-    }
-
-    public static void main(String[] args) {
-        if (args == null || args.length != 2 || args[0] == null || args[1] == null) {
-            System.err.println("Not good arguments!");
-            return;
-        }
-
-        var className = args[0];
-        var path = args[1];
-        var implementor = new Implementor();
-        try {
-            var cl = Class.forName(className);
-            var p = Paths.get(path);
-            implementor.implement(cl, p);
-        } catch (ClassNotFoundException ignored) {
-            System.err.println("Class not found!");
-        } catch (ImplerException ignored) {
-            System.err.println("Can't generate implementation of a class!");
-        }
-    }
 
     private final static String SUFFIX = "Impl";
+    private final static String COMMA = ";";
+    private final static String LEFT_BRACE = "{";
+    private final static String RIGHT_BRACE = "}";
+    private final static String LEFT_PARENTHESIS = "(";
+    private final static String RIGHT_PARENTHESIS = ")";
 
+    // Генерируем имя класса с суффиксом Impl.
     private String getClassName(Class<?> cl) {
         return cl.getSimpleName() + SUFFIX;
     }
 
-    private final static String COMMA = ";";
-
+    // Генерируем имя пакета.
     private String getPackageName(Class<?> cl) {
         if (!cl.getPackage().getName().equals("")) {
             return "package " + cl.getPackageName() + COMMA + System.lineSeparator() + System.lineSeparator();
@@ -80,22 +45,18 @@ public class Implementor implements Impler, JarImpler {
         writer.write(getPackageName(cl));
     }
 
-    private final static String LEFT_BRACE = "{";
-    private final static String RIGHT_BRACE = "}";
-
     private void writeClassFullName(Class<?> cl, BufferedWriter writer) throws IOException {
         writer.write("public class " + getClassName(cl) + (cl.isInterface() ? " implements " : " extends ") + cl.getSimpleName()
                 + " " + LEFT_BRACE + System.lineSeparator() + System.lineSeparator());
     }
 
-    private final static String LEFT_PARENTHESIS = "(";
-    private final static String RIGHT_PARENTHESIS = ")";
-
+    // Генерируем конструкторы и записываем их.
     private void writeConstructors(Class<?> cl, BufferedWriter writer) throws IOException, ImplerException {
         Constructor<?>[] constructors = cl.getDeclaredConstructors();
         boolean has = false;
         for (Constructor c : constructors) {
             int mod = c.getModifiers();
+            // Приватные методы не наследуем!
             if (!Modifier.isPrivate(mod)) {
                 has = true;
                 if (Modifier.isPublic(mod)) {
@@ -113,6 +74,7 @@ public class Implementor implements Impler, JarImpler {
                     }
                 }
                 writer.write(RIGHT_PARENTHESIS);
+                // Не забываем про исключения.
                 Class[] exceptions = c.getExceptionTypes();
                 if (exceptions.length != 0) {
                     writer.write(" throws ");
@@ -125,6 +87,7 @@ public class Implementor implements Impler, JarImpler {
                     }
                 }
                 writer.write("  " + LEFT_BRACE + System.lineSeparator());
+                // При наследовании конструктора вызываем конструктор родителя.
                 writer.write("super(");
                 for (Parameter p : parameters) {
                     if (p == parameters[parameters.length - 1]) {
@@ -141,6 +104,7 @@ public class Implementor implements Impler, JarImpler {
         }
     }
 
+    // Генерируем методы и записываем их.
     private void writeMethods(Class<?> cl, BufferedWriter writer) throws IOException {
         Method[] methods = cl.getMethods();
         Set<Method> abstractMethods = new HashSet<>(Arrays.asList(methods));
@@ -183,6 +147,7 @@ public class Implementor implements Impler, JarImpler {
                     }
                 }
                 writer.write(" " + LEFT_BRACE + System.lineSeparator());
+                // Делаем стандартный return у методов.
                 writer.write("\t return ");
                 if (!m.getReturnType().isPrimitive()) {
                     writer.write("null");
@@ -208,6 +173,7 @@ public class Implementor implements Impler, JarImpler {
         return path.resolve(cl.getPackage().getName().replace('.', File.separatorChar)).resolve(String.format("%s.%s", cl.getSimpleName().concat(SUFFIX), "java"));
     }
 
+    // Создаем директорию, в которой будет лежать наш файл.
     private void createDirectories(Path path) {
         if (path.getParent() != null) {
             try {
@@ -219,9 +185,52 @@ public class Implementor implements Impler, JarImpler {
 
     }
 
+    // Метод, который создает класс, который имплементит интерфейс или наследует класс.
+    @Override
+    public void implement(Class<?> aClass, Path path) throws ImplerException {
+        if (aClass.isPrimitive() || aClass.isArray() || aClass == Enum.class || Modifier.isFinal(aClass.getModifiers())) {
+            throw new ImplerException("It isn't a class or interface!");
+        }
+        path = getFilePath(path, aClass);
+        createDirectories(path);
+        try (var writer = Files.newBufferedWriter(path)) {
+            writePackage(aClass, writer);
+            writeClassFullName(aClass, writer);
+            if (!aClass.isInterface()) {
+                writeConstructors(aClass, writer);
+            }
+            writeMethods(aClass, writer);
+            writer.write(RIGHT_BRACE + COMMA);
+        } catch (IOException e) {
+            throw new ImplerException("Can't write implementation for this class!");
+        }
+
+    }
+
     @Override
     public void implementJar(Class<?> aClass, Path path) throws ImplerException {
 
+    }
+
+
+    public static void main(String[] args) {
+        if (args == null || args.length != 2 || args[0] == null || args[1] == null) {
+            System.err.println("Not good arguments!");
+            return;
+        }
+
+        var className = args[0];
+        var path = args[1];
+        var implementor = new Implementor();
+        try {
+            var cl = Class.forName(className);
+            var p = Paths.get(path);
+            implementor.implement(cl, p);
+        } catch (ClassNotFoundException ignored) {
+            System.err.println("Class not found!");
+        } catch (ImplerException ignored) {
+            System.err.println("Can't generate implementation of a class!");
+        }
     }
 }
 
