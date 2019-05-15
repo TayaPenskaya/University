@@ -24,6 +24,7 @@ public class IterativeParallelism implements ScalarIP, ListIP {
             r += eachCount + (remainder-- > 0 ? 1 : 0);
             parts.add(list.subList(l, r).stream());
         }
+        String hello = "Hello!";
         return parts;
     }
 
