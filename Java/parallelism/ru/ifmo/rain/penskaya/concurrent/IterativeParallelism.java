@@ -8,39 +8,24 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class IterativeParallelism implements ScalarIP, ListIP {
 
-    private <T> List<Stream<? extends T>> partition(int i, List<? extends T> list){
-        if(i <= 0) throw new IllegalArgumentException("Illegal threads number!");
+    private <T> List<Stream<? extends T>> partition(int i, List<? extends T> list) {
+        if (i <= 0) throw new IllegalArgumentException("Illegal threads number!");
         int threadsNumber = Math.max(1, Math.min(list.size(), i));
-        int eachCount = list.size() / threadsNumber ;
+        int eachCount = list.size() / threadsNumber;
         int remainder = list.size() % threadsNumber;
-        int l, r  = 0;
+        int l, r = 0;
         List<Stream<? extends T>> parts = new ArrayList<>();
-        for (int j = 0; j < threadsNumber; j++){
+        for (int j = 0; j < threadsNumber; j++) {
             l = r;
             r += eachCount + (remainder-- > 0 ? 1 : 0);
             parts.add(list.subList(l, r).stream());
         }
-        String hello = "Hello!";
         return parts;
-    }
-
-    @Override
-    public String join(int i, List<?> list) throws InterruptedException {
-        return null;
-    }
-
-    @Override
-    public <T> List<T> filter(int i, List<? extends T> list, Predicate<? super T> predicate) throws InterruptedException {
-        return null;
-    }
-
-    @Override
-    public <T, U> List<U> map(int i, List<? extends T> list, Function<? super T, ? extends U> function) throws InterruptedException {
-        return null;
     }
 
     private abstract class Worker<R> implements Runnable {
@@ -95,5 +80,28 @@ public class IterativeParallelism implements ScalarIP, ListIP {
     @Override
     public <T> boolean any(int i, List<? extends T> list, Predicate<? super T> predicate) throws InterruptedException {
         return result(i, list, j -> j.anyMatch(predicate), j -> j.anyMatch(Predicate.isEqual(true)));
+    }
+
+    @Override
+    public String join(int i, List<?> list) throws InterruptedException {
+        StringBuilder concat = new StringBuilder();
+        map(i, list, Object::toString).forEach(concat::append);
+        return concat.toString();
+    }
+
+    @Override
+    public <T> List<T> filter(int i, List<? extends T> list, Predicate<? super T> predicate) throws InterruptedException {
+        return result(i, list, j -> j.filter(predicate).collect(Collectors.toList()), j -> j.reduce(new ArrayList<>(), (k, l) -> {
+            k.addAll(l);
+            return k;
+        }));
+    }
+
+    @Override
+    public <T, U> List<U> map(int i, List<? extends T> list, Function<? super T, ? extends U> function) throws InterruptedException {
+        return result(i, list, j -> j.map(function).collect(Collectors.toList()), j -> j.reduce(new ArrayList<>(), (k, l) -> {
+            k.addAll(l);
+            return k;
+        }));
     }
 }
