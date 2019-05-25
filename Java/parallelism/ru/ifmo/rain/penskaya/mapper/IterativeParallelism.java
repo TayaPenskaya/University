@@ -1,9 +1,11 @@
-package ru.ifmo.rain.penskaya.concurrent;
+package ru.ifmo.rain.penskaya.mapper;
 
 import info.kgeorgiy.java.advanced.concurrent.ListIP;
 import info.kgeorgiy.java.advanced.concurrent.ScalarIP;
+import info.kgeorgiy.java.advanced.mapper.ParallelMapper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
@@ -12,52 +14,53 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class IterativeParallelism implements ScalarIP, ListIP {
+    ParallelMapper parallelMapper;
+    int threadsNumber;
+    int eachCount;
+    int remainder;
 
-    private <T> List<Stream<? extends T>> partition(int i, List<? extends T> list) {
+    public IterativeParallelism(ParallelMapper parallelMapper){
+        this.parallelMapper = parallelMapper;
+    }
+
+    private <T> void partition(int i, List<? extends T> list) {
         if (i <= 0) throw new IllegalArgumentException("Illegal threads number!");
         int threadsNumber = Math.max(1, Math.min(list.size(), i));
         int eachCount = list.size() / threadsNumber;
         int remainder = list.size() % threadsNumber;
+    }
+
+    public <T> void addTask(List<Stream<? extends T>> tasks, List<? extends T> list){
         int l, r = 0;
-        List<Stream<? extends T>> parts = new ArrayList<>();
         for (int j = 0; j < threadsNumber; j++) {
             l = r;
             r += eachCount + (remainder-- > 0 ? 1 : 0);
-            parts.add(list.subList(l, r).stream());
+            tasks.add(list.subList(l, r).stream());
         }
-        return parts;
     }
 
-    private abstract class Worker<R> implements Runnable {
-        private R result;
-        void countResult(R result){
-            this.result = result;
-        }
-        R getResult(){
-            return result;
+    public <T, R> void addThreads(List<R> values, List<? extends T> list, Function<Stream<? extends T>, R> function, List<Thread> threads){
+        for (int j = 0, l, r = 0; j < threadsNumber; j++) {
+            l = r;
+            r = l + eachCount + (remainder-- > 0 ? 1 : 0);
+            int finalL = l;
+            int finalR = r;
+            int finalJ = j;
+            var thread = new Thread(() -> values.set(finalJ, function.apply(list.subList(finalL, finalR).stream())));
+            thread.start();
+            threads.set(j, thread);
         }
     }
 
     private <T, R> R result(int i, List<? extends T> list, Function<Stream<? extends T>, R> function, Function<? super Stream<R>, R> resultFunc) throws InterruptedException {
-        List<Stream<? extends T>> parts = partition(i, list);
-        List<Thread> threads = new ArrayList<>();
-        List<Worker<R>> workers = new ArrayList<>();
-        for(Stream<? extends T> part : parts){
-            Worker<R> worker = new Worker<>() {
-                @Override
-                public void run() {
-                    countResult(function.apply(part));
-                }
-            };
-            workers.add(worker);
-            Thread thread = new Thread(worker);
-            threads.add(thread);
-            thread.start();
-        }
-        for(Thread thread : threads){
-            thread.join();
-        }
-        return resultFunc.apply(workers.stream().map(Worker::getResult));
+        partition(i, list);
+        List<R> values = new ArrayList<>(Collections.nCopies(threadsNumber, null));
+        List<Thread> threadList = new ArrayList<>(Collections.nCopies(threadsNumber, null));
+           addThreads(values, list, function, threadList);
+            for (Thread thread : threadList) {
+                thread.join();
+            }
+        return resultFunc.apply(values.stream());
     }
 
     @Override
