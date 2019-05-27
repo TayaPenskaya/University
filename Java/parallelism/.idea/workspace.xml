@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e4aea79-a74d-446f-a385-8ef3b02a6978" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ru/ifmo/rain/penskaya/mapper/ParallelMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ru/ifmo/rain/penskaya/concurrent/IterativeParallelism.java" beforeDir="false" afterPath="$PROJECT_DIR$/ru/ifmo/rain/penskaya/mapper/IterativeParallelism.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TextStatistics/src/in.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TextStatistics/src/out.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TextStatistics/src/text_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TextStatistics/src/text_ru.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TextStatistics/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TextStatistics/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TextStatistics/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TextStatistics/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TextStatistics/src/TextStatistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TextStatistics/src/TextStatistics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TextStatistics/src/properties/en.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TextStatistics/src/properties/ru.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ru/ifmo/rain/penskaya/mapper/IterativeParallelism.java" beforeDir="false" afterPath="$PROJECT_DIR$/ru/ifmo/rain/penskaya/mapper/IterativeParallelism.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,22 +25,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ru/ifmo/rain/penskaya/mapper/IterativeParallelism.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="58" column="7" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="7" />
+            <state relative-caret-position="172">
+              <caret line="67" column="59" lean-forward="true" selection-start-line="67" selection-start-column="59" selection-end-line="67" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#630#631#0" expanded="true" />
-                <element signature="e#682#683#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/tests/info.kgeorgiy.java.advanced.mapper.jar!/info/kgeorgiy/java/advanced/mapper/ParallelMapper.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -41,7 +37,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ru/ifmo/rain/penskaya/mapper/ParallelMapperImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
+            <state relative-caret-position="941">
               <caret line="80" column="16" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -53,7 +49,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/util/concurrent/CountDownLatch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
+            <state relative-caret-position="2865">
               <caret line="230" column="16" selection-start-line="230" selection-start-column="16" selection-end-line="230" selection-end-column="16" />
             </state>
           </provider>
@@ -91,6 +87,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -107,19 +104,12 @@
               <item name="parallelism" type="b2602c69:ProjectViewProjectNode" />
               <item name="parallelism" type="462c0819:PsiDirectoryNode" />
               <item name="penskaya" type="462c0819:PsiDirectoryNode" />
-              <item name="concurrent" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="parallelism" type="b2602c69:ProjectViewProjectNode" />
-              <item name="parallelism" type="462c0819:PsiDirectoryNode" />
-              <item name="penskaya" type="462c0819:PsiDirectoryNode" />
               <item name="mapper" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -192,7 +182,7 @@
     <frame x="0" y="23" width="1440" height="796" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2746781" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27825466" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -248,6 +238,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/util/concurrent/CountDownLatch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2865">
+          <caret line="230" column="16" selection-start-line="230" selection-start-column="16" selection-end-line="230" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$PROJECT_DIR$/tests/info.kgeorgiy.java.advanced.mapper.jar!/info/kgeorgiy/java/advanced/mapper/ParallelMapper.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -255,16 +252,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/util/concurrent/CountDownLatch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="230" column="16" selection-start-line="230" selection-start-column="16" selection-end-line="230" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ru/ifmo/rain/penskaya/mapper/ParallelMapperImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
+        <state relative-caret-position="941">
           <caret line="80" column="16" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -274,12 +264,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ru/ifmo/rain/penskaya/mapper/IterativeParallelism.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="58" column="7" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="7" />
+        <state relative-caret-position="172">
+          <caret line="67" column="59" lean-forward="true" selection-start-line="67" selection-start-column="59" selection-end-line="67" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#630#631#0" expanded="true" />
-            <element signature="e#682#683#0" expanded="true" />
           </folding>
         </state>
       </provider>
