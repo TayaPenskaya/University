@@ -56,10 +56,17 @@ public class IterativeParallelism implements ScalarIP, ListIP {
         partition(i, list);
         List<R> values = new ArrayList<>(Collections.nCopies(threadsNumber, null));
         List<Thread> threadList = new ArrayList<>(Collections.nCopies(threadsNumber, null));
-           addThreads(values, list, function, threadList);
-            for (Thread thread : threadList) {
-                thread.join();
+        if (parallelMapper != null) {
+            var tasks = new ArrayList<Stream<? extends T>>();
+            for (int j = 0, l, r = 0; j < threadsNumber; j++) {
+                l = r;
+                r = l + eachCount + (remainder-- > 0 ? 1 : 0);
+                tasks.add(list.subList(l, r).stream());
             }
+            values = parallelMapper.map(function, tasks);
+        } else {
+            addThreads(values, list, function, threadList);
+        }
         return resultFunc.apply(values.stream());
     }
 
