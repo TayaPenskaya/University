@@ -49,7 +49,7 @@ public class TextStatistics {
     // Getting statistics of sentences.
     private int[] getSentenceStatics(String source) {
 
-        int[] result = new int[7];
+        int[] result = new int[5];
 
         ArrayList<String> sentences = getSentencesFromText(source);
 //        for(int i = 0; i < sentences.size(); ++i){
@@ -78,9 +78,56 @@ public class TextStatistics {
         return result;
     }
 
+    //Find each word in text
+    private ArrayList<String> getWordsFromText(String source){
+        ArrayList<String> words = new ArrayList<>();
+        BreakIterator boundary = BreakIterator.getWordInstance(inLocale);
+        boundary.setText(source);
+        int start = boundary.first();
+        for(int end = boundary.next(); end != BreakIterator.DONE; start = end, end = boundary.next()){
+            if(Character.isLetter(source.codePointAt(start))) {
+                words.add(source.substring(start, end));
+            }
+        }
+        return words;
+    }
 
+    //Getting statistics of words
+    private int[] getWordStatistics(String source){
+        int[] result = new int[5];
 
+        ArrayList<String> words = getWordsFromText(source);
+//        for(int i = 0; i < words.size(); ++i){
+//            System.out.println(i + ": " + words.get(i));
+//        }
 
+        //Count the number of words
+        result[0] = words.size();
+
+        //Count the number of unique sentences
+        result[1] = (int) words.stream().distinct().count();
+
+        //Find the max/min word for character comparison
+        String max = words.stream().max(String::compareTo).orElse("");
+        System.out.println(max);
+        String min = words.stream().min(String::compareTo).orElse("");
+        System.out.println(min);
+
+        //Find the max length sentence
+        String maxLengthWord = words.stream().reduce(words.get(0), (l,r) -> l.length() > r.length() ? l : r);
+        System.out.println(maxLengthWord);
+        result[2] = maxLengthWord.length()-1;
+
+        //Find the min length sentence
+        String minLengthWord = words.stream().reduce(words.get(0), (l,r) -> l.length() < r.length() ? l : r);
+        System.out.println(minLengthWord);
+        result[3] = minLengthWord.length()-1;
+
+        int mid = words.stream().map(String::length).reduce((l,r) -> l + r).get();
+        result[4] = mid/words.size();
+
+        return result;
+    }
 
 
     public void printStatistics() throws IOException {
@@ -94,10 +141,16 @@ public class TextStatistics {
         System.out.println(inFilePath);
 
         System.out.println(rbOut.getString("statistics"));
-        System.out.println(getSentenceStatics(inFileContent)[0]);
-        System.out.println(getSentenceStatics(inFileContent)[1]);
-        System.out.println(getSentenceStatics(inFileContent)[2]);
-        System.out.println(getSentenceStatics(inFileContent)[3]);
-        System.out.println(getSentenceStatics(inFileContent)[4]);
+//        System.out.println(getSentenceStatics(inFileContent)[0]);
+//        System.out.println(getSentenceStatics(inFileContent)[1]);
+//        System.out.println(getSentenceStatics(inFileContent)[2]);
+//        System.out.println(getSentenceStatics(inFileContent)[3]);
+//        System.out.println(getSentenceStatics(inFileContent)[4]);
+        System.out.println(getWordStatistics(inFileContent)[0]);
+        System.out.println(getWordStatistics(inFileContent)[1]);
+        System.out.println(getWordStatistics(inFileContent)[2]);
+        System.out.println(getWordStatistics(inFileContent)[3]);
+        System.out.println(getWordStatistics(inFileContent)[4]);
+
     }
 }
