@@ -1,0 +1,7 @@
+#!/bin/bash
+./task5_handler& < data.txt
+while true
+do
+	read LINE
+	echo $LINE >> data.txt
+done

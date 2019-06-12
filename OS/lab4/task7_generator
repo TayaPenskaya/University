@@ -1,0 +1,19 @@
+#!/bin/bash
+./task7_handler&
+while true
+do
+	read line
+	case $line in
+		"+")
+			kill -USR1 $(cat task7_pid)
+			;;
+		"*")
+			kill -USR2 $(cat task7_pid)
+			;;
+		"TERM")
+			kill -SIGTERM $(cat task7_pid)
+			sleep 2
+			exit
+			;;
+	esac
+done

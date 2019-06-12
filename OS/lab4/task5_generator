@@ -1,0 +1,12 @@
+#!/bin/bash
+./task5_handler& > data.txt
+while true
+do
+	read line
+	if [[ $line = "*" ]]
+	then
+		echo "x" >> data.txt
+	else
+		echo $line >> data.txt
+	fi
+done

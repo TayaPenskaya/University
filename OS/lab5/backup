@@ -1,0 +1,50 @@
+#!/bin/bash
+cd ~
+lastDate="$(ls | grep -E "Backup-" | sort -n | tail -1 | cut -d "-" -f 2,3,4)"
+echo $lastDate
+dateNow="$(date +%Y-%m-%d)"
+echo $dateNow
+
+timestamp() {
+	date -f '+%s' "$1"
+}
+lastDateToTime="$(timestamp "$lastDate")"
+dateNowToTime="$(timestamp "$dateNow")"
+
+echo $dateNowToTime
+
+diff="$($lastDateToTime-$dateNowToTime)"
+echo $diff
+
+if [[ $diff -gt 7 ]]
+then
+	mkdir "Backup-$dateNow"
+	cd ~/source
+	files=$(ls)
+	for i in $files 
+	do
+		cp -R $i ~/Backup-$dateNow
+	done
+	cd ..
+	echo "Backup-$dateNow was created, files: $files" >> backup-report
+else
+	cd ~/source
+	files=$(ls)
+	cd ~/Backup-$lastDate
+	for i in $files
+	do
+		if [ -f $i ]
+		then
+			firstSize="$(ls -l ~/source/$i | awk '{print$5}')"
+			secondSize="$(ls -l $i | awk '{print$5}')"
+			if [[ $firstSize -ne $secondSize ]]
+			then
+				mv $i $i-$dateNow
+				cp -R ~/source/$i ~/Backup-$dateFiles
+				echo "Rename $i to $i-$dateNow" >> ~/backup-report
+			fi
+		else
+			cp -R ~/source/$i ~/Backup-$lastDate
+		fi
+	done
+fi

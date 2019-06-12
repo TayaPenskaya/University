@@ -1,0 +1,18 @@
+#!/bin/bash
+file=$1
+
+trash=~/.trash
+if ! [ -d $trash ]; then
+	mkdir $trash
+fi
+
+uniqueFile=$(date +%F-%H-%M-%S)
+ln $file "$trash/$uniqueFile"
+rm $file
+
+log=~/trash.log
+if ! [ -e $log ]; then
+	touch $log
+fi
+echo "$PWD/$file:$uniqueFile" >> $log
+

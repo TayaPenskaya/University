@@ -1,0 +1,40 @@
+#!/bin/bash
+res=1
+operation="+"
+(tail -n 0 -f data.txt) |
+while true
+do
+	read line
+	case $line in
+		"+")
+			echo "Addition"
+			operation="+"
+			;;
+		"x")
+			echo "Multiplication"
+			operation="x"
+			;;
+		[0-9]*)
+			case $operation in
+				"+") 
+					res=$(( $res+$line ))
+					;;
+				"x")
+					res=$(( $res*$line ))
+					;;
+			esac
+			echo "result = $res"
+			;;
+		QUIT)
+			echo "exit"
+			killall tail
+			exit
+			;;
+		*)
+			echo "Wrong data!"
+			killall tail
+			exit
+			;;			
+	esac
+done
+# < data.txt

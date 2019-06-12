@@ -1,0 +1,12 @@
+#Task4
+#!/bin/bash
+count=0
+while read i
+do
+if [[ $i%2 -eq 0 ]]
+then 
+break
+fi
+count=$(( $count + 1 ))
+done
+echo $count
