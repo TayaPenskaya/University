@@ -1,8 +1,9 @@
 import java.io.*;
 import java.text.BreakIterator;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.*;
-
-import static java.util.Collections.*;
 
 public class TextStatistics {
 
@@ -34,7 +35,7 @@ public class TextStatistics {
     }
 
 
-    //Find each sentence in text
+    //Find each sentence in text.
     private ArrayList<String> getSentencesFromText(String source){
         ArrayList<String> sentences = new ArrayList<>();
         BreakIterator boundary = BreakIterator.getSentenceInstance(inLocale);
@@ -78,10 +79,10 @@ public class TextStatistics {
         return result;
     }
 
-    //Find each word in text
+    //Find each word in text.
     private ArrayList<String> getWordsFromText(String source){
         ArrayList<String> words = new ArrayList<>();
-        BreakIterator boundary = BreakIterator.getWordInstance(inLocale);
+        BreakIterator boundary = BreakIterator.getCharacterInstance(inLocale);
         boundary.setText(source);
         int start = boundary.first();
         for(int end = boundary.next(); end != BreakIterator.DONE; start = end, end = boundary.next()){
@@ -92,7 +93,7 @@ public class TextStatistics {
         return words;
     }
 
-    //Getting statistics of words
+    //Getting statistics of words.
     private int[] getWordStatistics(String source){
         int[] result = new int[5];
 
@@ -129,6 +130,132 @@ public class TextStatistics {
         return result;
     }
 
+    //Find each line in text.
+    private List<String> getLinesFromText(String source){
+        String[] lines = source.split("\r\n|\r|\n");
+        return Arrays.asList(lines);
+    }
+
+    // Getting statistics of lines.
+    private int[] getLineStatistics(String source) {
+
+        int[] result = new int[5];
+
+        List<String> lines = getLinesFromText(source);
+        for(int i = 0; i < lines.size(); ++i){
+            System.out.println(i + ": " + lines.get(i));
+        }
+
+        //Count the number of sentences
+        result[0] = lines.size();
+
+        //Count the number of unique sentences
+        result[1] = (int) lines.stream().distinct().count();
+
+        //Find the max length line
+        String max = lines.stream().reduce(lines.get(0), (l,r) -> l.length() > r.length() ? l : r);
+        System.out.println(max);
+        result[2] = max.length()-1;
+
+        //Find the min length line
+        String min = lines.stream().reduce(lines.get(0), (l,r) -> l.length() < r.length() ? l : r);
+        System.out.println(min);
+        result[3] = min.length()-1;
+
+        int mid = lines.stream().map(String::length).reduce((l,r) -> l + r).get();
+        result[4] = mid/lines.size();
+
+        return result;
+    }
+
+    //Find each number in text
+    private ArrayList<Double> getNumbersFromText(String source){
+        NumberFormat nf = NumberFormat.getNumberInstance(inLocale);
+        BreakIterator boundary = BreakIterator.getLineInstance(inLocale);
+        ArrayList<Double> numbers = new ArrayList<>();
+        boundary.setText(source);
+        int start = boundary.first();
+        for(int end = boundary.next(); end != BreakIterator.DONE; start = end, end = boundary.next()){
+            try{
+                Number number = nf.parse(source.substring(start,end));
+                numbers.add(number.doubleValue());
+            }catch (ParseException ignored){
+
+            }
+        }
+        return numbers;
+    }
+
+    private int[] getNumberStatistics(String source){
+        int[] result = new int[7];
+
+        ArrayList<Double> numbers = getNumbersFromText(source);
+//        for(int i = 0; i < numbers.size(); ++i){
+//            System.out.println(i + ": " + numbers.get(i));
+//        }
+
+        //Count the number of numbers
+        result[0] = numbers.size();
+
+        //Count the number of unique numbers
+        result[1] = (int) numbers.stream().distinct().count();
+
+        //Find the max/min number
+        Double max = numbers.stream().max(Double::compareTo).orElse(0.0);
+        System.out.println(max);
+        Double min = numbers.stream().min(Double::compareTo).orElse(0.0);
+        System.out.println(min);
+
+        //Find the max length number
+        Double maxLength = numbers.stream().reduce(numbers.get(0), (l,r) -> l.toString().length() > r.toString().length() ? l : r);
+        System.out.println(maxLength);
+        result[2] = maxLength.toString().length();
+
+        //Find the min length number
+        Double minLength = numbers.stream().reduce(numbers.get(0), (l,r) -> l.toString().length() < r.toString().length() ? l : r);
+        System.out.println(minLength);
+        result[3] = minLength.toString().length();
+
+        Double mid = numbers.stream().reduce((l,r) -> l + r).get();
+
+        return result;
+    }
+
+    //Find each date in Text
+    private ArrayList<TextDate> getDatesFromText(String source){
+        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, inLocale);
+        BreakIterator boundary = BreakIterator.getLineInstance(inLocale);
+        ArrayList<TextDate> dates = new ArrayList<>();
+        boundary.setText(source);
+        int start = boundary.first();
+        for(int end = boundary.next(); end != BreakIterator.DONE; start = end, end = boundary.next()){
+            try{
+                Date date = df.parse(source.substring(start,end));
+                dates.add(new TextDate(date, source.substring(start,end)));
+            }catch (ParseException ignored){
+
+            }
+        }
+        return dates;
+    }
+
+    //Find each currency in Text
+    private ArrayList<TextCurrency> getCurrencyFromText(String source){
+        NumberFormat nf = NumberFormat.getCurrencyInstance(inLocale);
+        BreakIterator boundary = BreakIterator.getLineInstance(inLocale);
+        ArrayList<TextCurrency> currency = new ArrayList<>();
+        boundary.setText(source);
+        int start = boundary.first();
+        for(int end = boundary.next(); end != BreakIterator.DONE; start = end, end = boundary.next()){
+            try{
+                Number number = nf.parse(source.substring(start,end));
+                currency.add(new TextCurrency(number, source.substring(start,end)));
+            }catch (ParseException ignored){
+
+            }
+        }
+        return currency;
+    }
 
     public void printStatistics() throws IOException {
         ResourceBundle rbIn = ResourceBundle.getBundle("text", inLocale);
@@ -146,11 +273,19 @@ public class TextStatistics {
 //        System.out.println(getSentenceStatics(inFileContent)[2]);
 //        System.out.println(getSentenceStatics(inFileContent)[3]);
 //        System.out.println(getSentenceStatics(inFileContent)[4]);
-        System.out.println(getWordStatistics(inFileContent)[0]);
-        System.out.println(getWordStatistics(inFileContent)[1]);
-        System.out.println(getWordStatistics(inFileContent)[2]);
-        System.out.println(getWordStatistics(inFileContent)[3]);
-        System.out.println(getWordStatistics(inFileContent)[4]);
-
+//        System.out.println(getWordStatistics(inFileContent)[0]);
+//        System.out.println(getWordStatistics(inFileContent)[1]);
+//        System.out.println(getWordStatistics(inFileContent)[2]);
+//        System.out.println(getWordStatistics(inFileContent)[3]);
+//        System.out.println(getWordStatistics(inFileContent)[4]);
+//        System.out.println(getLineStatistics(inFileContent)[0]);
+//        System.out.println(getLineStatistics(inFileContent)[1]);
+//        System.out.println(getLineStatistics(inFileContent)[2]);
+//        System.out.println(getLineStatistics(inFileContent)[3]);
+//        System.out.println(getLineStatistics(inFileContent)[4]);
+        System.out.println(getNumberStatistics(inFileContent)[0]);
+        System.out.println(getNumberStatistics(inFileContent)[1]);
+        System.out.println(getNumberStatistics(inFileContent)[2]);
+        System.out.println(getNumberStatistics(inFileContent)[3]);
     }
 }
