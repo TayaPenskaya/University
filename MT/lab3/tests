@@ -1,0 +1,63 @@
+int main()
+{
+    int x1 = 10, x2 = 20, m = 2;
+    bool b1, b2;
+    b1 = x1 == x2;
+    b2 = x1 < x2;
+
+    std::cout << "b1 is " << b1;
+    std::cout << "b2 is " << b2;
+    bool b3 = true;
+
+    if (b3) {
+        std::cout << "Yes";
+    } else {
+        std::cout << "No";
+    }
+
+    int x3 = false + 5 * m - b3;
+    std::cout << x3;
+
+    return 0;
+}
+
+
+void s() {
+    int i = 0;
+
+    while (i < 5) {
+        if (i == 3) {
+            i = i + 1;
+        }
+        std::cout << i << std::endl;
+        ++i;
+    }
+}
+
+bool check_x() {
+    int x = 10;
+    if (x > 0) {
+        x = 0;
+    } else {
+        x = 5;
+    }
+    return x;
+}
+
+
+int f(int n, int a, std::string v) {
+    int res = 1;
+    for (int i = 1; i <= n; ++i) {
+        res = res * i;
+    }
+    return res;
+}
+
+void check(int a, int b, int c) {
+    int d = a + b;
+    if (d < a+b+c) {
+        std::cout << "hahaha" << std::endl;
+    } else {
+        std::cout << "hihih" << std::endl;
+    }
+}
