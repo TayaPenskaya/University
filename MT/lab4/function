@@ -1,0 +1,29 @@
+grammar Foo;
+
+start returns [ParseTree res]  :  t=type() n=name() LBR {ParseTree lbr = new ParseTree("(");}
+a=args() RBR {ParseTree rbr = new ParseTree(")");} c=const_()
+SEMI {ParseTree semi = new ParseTree(";"); res = new ParseTree("Function", t, n, lbr, a, rbr, c, semi);};
+
+args returns [ParseTree res]   :  a=arg() a_=arg_() {res = new ParseTree("Args", a, a_);} | EPS {res = new ParseTree("Args");};
+
+arg returns [ParseTree res]    :  c=const_() t=type() s=star() n=name() {res = new ParseTree("Arg", c, t, s, n);};
+
+arg_ returns [ParseTree res]   :  COMMA {ParseTree comma = new ParseTree(",");} c=const_() t=type() s=star() n=name() a_=arg_()
+{res = new ParseTree("Arg_", comma, c, t, s, n, a_);} | EPS {res = new ParseTree("Arg_");};
+
+const_ returns [ParseTree res] :  CONST {res = new ParseTree("Const", new ParseTree("const"));} | EPS {res = new ParseTree("Const");};
+
+star returns [ParseTree res]   :  STAR {ParseTree starT = new ParseTree("*");} s=star() {res = new ParseTree("Star", starT, s);}
+| EPS {res = new ParseTree("Star");};
+
+type returns [ParseTree res]   :  w=WORD {res = new ParseTree("Name", new ParseTree(w.getFilling()));};
+
+name returns [ParseTree res]   :  w=WORD {res = new ParseTree("Name", new ParseTree(w.getFilling()));};
+
+CONST   :   "const";
+LBR     :   "\\(";
+RBR     :   "\\)";
+COMMA   :   ",";
+SEMI    :   ";";
+STAR    :   "\\*";
+WORD    :   "[A-Za-z]+";
