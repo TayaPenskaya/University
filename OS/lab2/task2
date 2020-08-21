@@ -1,0 +1,3 @@
+#!/bin/bash
+grep -h \(WW\) /var/log/os1.rtf | sed 's/\(WW\)/Warning: /' > full.log
+grep -h \(II\) /var/log/os1.rtf | sed 's/\(II\)/Information: /' >> full.log

@@ -1,0 +1,36 @@
+#!/bin/bash
+fileName=~/lab5/$1
+for i in $(grep -h $1 ~/trash.log)
+do
+	#echo $i
+	if [[ "$i" =~ "$fileName" ]]
+	then
+		echo "Do you want to restore $i? Y|N"
+		read ans
+		if [ $ans = "Y" ]
+		then
+			dir=$(echo $i | cut -d ":" -f 1)
+			trFile=$(echo $i | cut -d ":" -f 2)
+			#echo $dir
+			#echo $trFile
+			full=~/.trash/$trFile
+			#echo $full
+			if [ -d $(dirname $dir) ]
+			then
+				if [[ -e $dir  ]]
+				then
+					echo "Create a new name: "
+					read name
+					ln $full $(dirname $dir)/$name
+				else
+					ln $full $dir
+				fi
+			else 
+				echo "$(dirname $dir) was removed!"
+				ln $full ~/$1
+			fi
+			rm $full
+		fi
+	fi
+
+done

@@ -1,0 +1,3 @@
+#!/bin/bash
+grep -h -r '^ACPI*' /var/log > errors.log
+grep -h -r '[[:alnum:]]\.[[:alpha:]]' errors.log

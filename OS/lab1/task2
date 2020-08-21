@@ -1,0 +1,12 @@
+#Task 2
+#!/bin/bash
+max=$1
+for i in $*
+do
+if [[ $i -ge $max ]]
+then 
+max=$i
+fi
+done
+echo $max
+
