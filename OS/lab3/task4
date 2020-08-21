@@ -1,4 +1,0 @@
-#!/bin/bash
-for pid in $(ps ax -o pid | tail +2); do
-    cat  /proc/$pid/maps  
-done

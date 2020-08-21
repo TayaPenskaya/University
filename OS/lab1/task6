@@ -1,9 +1,0 @@
-#Task6
-#!/bin/bash
-if [[ $0 == "./lab1/task6" ]]
-then 
-echo $HOME
-else
-echo "This is not your home directory."
-exit 1
-fi

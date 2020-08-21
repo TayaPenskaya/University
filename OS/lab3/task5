@@ -1,4 +1,0 @@
-#!/bin/bash
-for pid in $(ps -A -o pid | tail -n +2); do
-	/proc/$pid/status
-done

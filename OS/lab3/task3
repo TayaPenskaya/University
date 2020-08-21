@@ -1,3 +1,0 @@
-#!/bin/bash
-ps -axo pid,command | grep -E '^[0-9]\*\/sbin\/' $2 | awk '{ print $1}' > file1
-
