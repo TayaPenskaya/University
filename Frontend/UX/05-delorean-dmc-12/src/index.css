@@ -1,0 +1,299 @@
+@import url('https://fonts.googleapis.com/css?family=Rakkas&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Suez+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Old+Standard+TT&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Tangerine&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Rozha+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Kameron&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.page__header {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-areas: 'box1 title box2';
+  grid-template-columns: 300px 1fr 300px;
+
+  width: 100%;
+
+  margin: 20px 0 20px 0;
+}
+
+.header__title {
+  grid-area: title;
+
+  width: 100%;
+
+  font-family: 'Rakkas', cursive;
+  font-size: 5vw;
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+.header__p1 {
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+  grid-area: box1;
+
+  box-sizing: border-box;
+
+  width: 200px;
+  height: 100px;
+
+  padding: 10px;
+
+  border: 1px black solid;
+}
+
+.header__p1-content {
+  font-family: 'Roboto Mono', monospace;
+  text-align: center;
+}
+
+.header__p2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  justify-content: center;
+  grid-area: box2;
+
+  box-sizing: border-box;
+
+  width: 200px;
+  height: 100px;
+
+  padding: 10px;
+
+  border: 1px black solid;
+
+  font-family: 'Roboto Mono', monospace;
+  text-align: center;
+}
+
+.header__p2-title {
+  text-transform: uppercase;
+}
+
+.page__release-info {
+  display: grid;
+  grid-template-areas: 'num date price';
+  grid-template-columns: 1fr 1fr 1fr;
+
+  box-sizing: border-box;
+
+  border-top: 5px black double;
+  border-bottom: 5px black double;
+
+  text-transform: uppercase;
+}
+
+.release__number {
+  justify-self: start;
+  grid-area: num;
+
+  padding-left: 5px;
+}
+
+.release__date {
+  justify-self: center;
+  grid-area: date;
+}
+
+.release__price {
+  justify-self: end;
+  grid-area: price;
+
+  padding-right: 5px;
+}
+
+.page__content {
+  display: grid;
+  grid-template-columns: 1fr 0.7fr 2fr;
+
+  margin: 5px;
+}
+
+.content-col1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  padding: 10px;
+
+  border-right: 1px black solid;
+}
+
+.col1-title,
+.col3-title {
+  font-family: 'Suez One', serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+.col1-under-title {
+  font-family: 'Libre Baskerville', serif;
+  text-align: center;
+}
+
+.col1-img {
+  display: flex;
+  justify-content: space-between;
+
+  font-family: 'Tangerine', cursive;
+}
+
+.col1-img img {
+  width: 150px;
+  height: 150px;
+
+  padding: 2px;
+
+  border: 3px double black;
+}
+
+.col1-text {
+  font-family: 'Old Standard TT', serif;
+  text-align: center;
+}
+
+.line {
+  margin: 10px 30px 10px 30px;
+
+  border-bottom: 1px black solid;
+}
+
+.line1 {
+  margin: 10px 30px 10px 30px;
+
+  border-bottom: 3px black double;
+}
+
+.content-col2 {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-around;
+
+  margin: 10px;
+
+  text-align: center;
+}
+
+.col2-header1 {
+  font-family: 'Rozha One', serif;
+}
+
+.col2-header3,
+.col2-header5 {
+  font-family: 'Roboto Mono', monospace;
+  text-transform: uppercase;
+}
+
+.col2-header2,
+.col2-header4 {
+  font-family: 'Kameron', serif;
+}
+
+.col2-par {
+  font-family: 'Old Standard TT', serif;
+}
+
+.content-col3 {
+  display: grid;
+  grid-template-areas: 'title3 title3' 'img3 headers';
+
+  padding-left: 10px;
+
+  border-left: 1px black solid;
+}
+
+.col3-title {
+  grid-area: title3;
+
+  padding: 10px;
+
+  border-bottom: 3px black double;
+}
+
+.col3-img {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-around;
+  grid-area: img3;
+
+  padding: 10px;
+
+  border-right: 1px black solid;
+}
+
+.col3-img img {
+  align-self: center;
+
+  width: 200px;
+  height: 200px;
+
+  padding: 2px;
+
+  border: 3px double black;
+}
+
+.col3-img-title {
+  font-family: 'Rozha One', serif;
+  text-align: center;
+}
+
+.col3-img-content {
+  font-family: 'Old Standard TT', serif;
+  text-align: center;
+}
+
+.col3-headers {
+  justify-content: space-around;
+  grid-area: headers;
+
+  padding: 10px;
+
+  text-align: center;
+}
+
+.col3-header1,
+.col3-header3,
+.col3-header5 {
+  font-family: 'Roboto Mono', monospace;
+  text-transform: uppercase;
+}
+
+.col3-header2,
+.col3-header4 {
+  font-family: 'Kameron', serif;
+}
+
+.col3-par {
+  font-family: 'Old Standard TT', serif;
+}
+
+input[type='radio'] {
+  display: none;
+}

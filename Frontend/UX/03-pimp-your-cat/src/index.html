@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>03-pimp-your-cat</title>
+    <link rel="stylesheet" href="./index.css">
+  </head>
+  <body>
+
+    <form action="" class="form">
+
+      <header class="form__header">
+        <h1 class="form__header-title">
+          Прокачай кота!
+        </h1>
+        <p class="form__header-info">
+          Подпишись на мощную прокачку от нашего тренера
+          и получи индивидуальную программу тренировок для своего кота.
+          <br>
+          Время готовиться к лету!
+        </p>
+      </header>
+
+      <div class="form__close-img">
+        <input type="checkbox" id="form__close-id">
+        <label for="form__close-id" class="form__close">
+        </label>
+        <img class="form__img" src="img/puh.jpg" alt="Пухлый кошак">
+      </div>
+
+      <div class="form__button">
+
+        <fieldset class="form__age-weight">
+          <label for="form__age-id" class="form__age">
+            Кот
+            <input type="number" min="1" max="20" value="1" id="form__age-id" size="2">
+            лет и
+          </label>
+          <label for="form__weight-id" class="form__weight">
+            <input type="number" value="5" min="1" max="30" id="form__weight-id" size="2">
+            кг
+          </label>
+        </fieldset>
+
+        <div class="form__choice">
+          <input type="radio" name="choice" value="Похудение" id="form__choice-lose-id">
+          <label for="form__choice-lose-id" class="form__choice-lose">
+            Похудение
+          </label>
+          <input type="radio" name="choice" value="Не знаю" id="form__choice-any-id">
+          <label for="form__choice-any-id" class="form__choice-any">
+            Не знаю
+          </label>
+          <input type="radio" name="choice" value="Набор массы" id="form__choice-gain-id">
+          <label for="form__choice-gain-id" class="form__choice-gain">
+            Набор массы
+          </label>
+        </div>
+
+        <input class="form__email" type="email" placeholder="Email (ваш)" id="email-id">
+
+        <div class="form__spam">
+          <label for="form__spam-id">
+            <input type="checkbox" checked id="form__spam-id">
+            Хочу спам
+          </label>
+        </div>
+
+        <input class="form__submit" id="submit-id" type="submit" value="Подписаться">
+
+      </div>
+
+    </form>
+  </body>
+</html>

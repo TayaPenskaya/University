@@ -1,0 +1,41 @@
+.content__feedback {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  margin: 2em;
+  padding: 2em;
+
+  border: gray 1px solid;
+  border-radius: 5%;
+
+  box-shadow: gray 0 0 10px;
+}
+
+.content__feedback-title {
+  align-self: start;
+
+  margin-top: 0;
+}
+
+.content__feedback-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.content__feedback-comment {
+  margin-bottom: 1em;
+}
+
+.content__feedback-email {
+  margin-bottom: 1em;
+
+  font-size: 1em;
+}
+
+.content__feedback-submit {
+  background: lightgreen;
+
+  cursor: pointer;
+  font-size: 1em;
+}

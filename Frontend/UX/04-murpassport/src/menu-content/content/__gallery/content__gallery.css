@@ -1,0 +1,29 @@
+.content__gallery {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  margin: 2em;
+  padding: 2em;
+
+  border: gray 1px solid;
+  border-radius: 5%;
+
+  box-shadow: gray 0 0 10px;
+}
+
+.content__gallery-title {
+  align-self: start;
+
+  margin-top: 0;
+}
+
+.content__gallery-images {
+  align-self: center;
+}
+
+.content__gallery-images img {
+  width: 140px;
+
+  cursor: pointer;
+}

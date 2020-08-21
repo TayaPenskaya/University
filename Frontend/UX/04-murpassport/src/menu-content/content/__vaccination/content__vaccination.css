@@ -1,0 +1,25 @@
+.content__vaccination {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  margin: 2em;
+  padding: 2em;
+
+  border: gray 1px solid;
+  border-radius: 5%;
+
+  box-shadow: gray 0 0 10px;
+}
+
+.content__vaccination-title {
+  align-self: start;
+
+  margin-top: 0;
+}
+
+.content__vaccination-list {
+  align-self: start;
+
+  margin-bottom: 0;
+}

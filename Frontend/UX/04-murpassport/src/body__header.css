@@ -1,0 +1,23 @@
+.body__header {
+  position: sticky;
+  top: 0;
+
+  grid-area: header;
+
+  width: 100%;
+
+  margin: 0;
+
+  border-bottom: gray 1px solid;
+
+  background: white;
+}
+
+.header {
+  font-size: 2em;
+  text-align: center;
+}
+
+.header::first-letter {
+  color: red;
+}

@@ -1,0 +1,438 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.cats_title {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  display: flex;
+  align-content: center;
+  justify-content: center;
+
+  grid-area: head;
+
+  width: 100%;
+
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+
+  border-bottom: 1px solid lightgray;
+
+  background: white;
+
+  color: black;
+  font-family: 'PT SansNarrow', serif;
+  font-size: 42px;
+}
+
+input[type='radio'] {
+  display: none;
+}
+
+.filter {
+  display: none;
+}
+
+.cats_list {
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+  grid-area: main;
+
+  width: 100%;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+section {
+  display: inline-grid;
+  grid-template-rows: 4fr 0.5fr 1.5fr;
+
+  width: 300px;
+
+  margin: 20px 20px 20px 20px;
+
+  border: 1px solid lightgray;
+
+  background: white;
+
+  text-align: left;
+}
+
+section:hover {
+  box-shadow: 4px 4px 10px 3px darkgrey;
+}
+
+section img {
+  width: 100%;
+}
+
+section img:hover {
+  opacity: 0.8;
+}
+
+a.cat_name {
+  overflow: hidden;
+
+  margin: 10px 20px 10px 20px;
+
+  transition: all 0.6s;
+
+  color: black;
+  font-family: Arial, serif;
+  font-weight: bold;
+  text-align: left;
+  text-overflow: ellipsis;
+}
+
+a.cat_name:hover {
+  color: deepskyblue;
+}
+
+a.cat_name:visited {
+  color: purple;
+}
+
+.cat_short {
+  overflow: hidden;
+
+  margin: 10px 20px 10px 20px;
+
+  text-overflow: ellipsis;
+}
+
+.cat_long {
+  display: none;
+}
+
+@media screen and (min-width: 375px) and (max-width: 1200px) {
+  body {
+    display: grid;
+    grid-template-areas:
+      'head'
+      'main'
+      'foot';
+
+    width: 100%;
+  }
+
+  footer {
+    bottom: 0;
+
+    display: grid;
+
+    grid-area: foot;
+    grid-row-gap: 1em;
+    grid-template-areas: 'mail' 'company';
+
+    width: 100%;
+
+    border-top: 1px solid lightgray;
+
+    color: black;
+    font-family: Arial, serif;
+  }
+
+  .email {
+    grid-area: mail;
+
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+
+  .first-mail:before,
+  .second-mail:before {
+    display: inline-block;
+
+    width: 1em;
+    height: 1em;
+
+    margin-right: 0.4em;
+
+    background-image: url('icons/email.png');
+    background-size: 1em 1em;
+    content: '';
+  }
+
+  .company {
+    grid-area: company;
+
+    margin-bottom: 20px;
+
+    margin-left: 20px;
+  }
+}
+
+@media screen and (min-width: 730px) and (max-width: 1200px) {
+  body {
+    display: grid;
+    grid-template-areas:
+      'head'
+      'main'
+      'foot';
+
+    width: 100%;
+  }
+
+  footer {
+    bottom: 0;
+
+    display: grid;
+
+    grid-area: foot;
+    grid-template-areas: 'mail company';
+    grid-template-columns: 1fr 1fr;
+
+    width: 100%;
+
+    border-top: 1px solid lightgray;
+
+    color: black;
+    font-family: Arial, serif;
+    font-size: 18px;
+  }
+
+  .email {
+    justify-self: left;
+    grid-area: mail;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+  }
+
+  .first-mail:before,
+  .second-mail:before {
+    display: inline-block;
+
+    width: 1em;
+    height: 1em;
+
+    margin-right: 0.4em;
+
+    background-image: url('icons/email.png');
+    background-size: 1em 1em;
+    content: '';
+  }
+
+  .company {
+    align-self: end;
+    justify-self: right;
+    grid-area: company;
+
+    margin-right: 20px;
+
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  body {
+    display: grid;
+    grid-template-areas:
+      'head head'
+      'main filter'
+      'foot foot';
+    grid-template-columns: 3fr 1fr;
+
+    width: 100%;
+  }
+
+  .filter {
+    display: flex;
+    flex-direction: column;
+
+    grid-area: filter;
+
+    padding: 20px 20px 20px 20px;
+
+    border-left: 1px solid lightgray;
+
+    font-size: 25px;
+  }
+
+  .slider {
+    width: 100%;
+    height: 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+
+    -webkit-transition: 0.2s;
+
+    -webkit-appearance: none;
+    appearance: none;
+
+    background: paleturquoise;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .slider::-webkit-slider-thumb {
+    width: 25px;
+    height: 25px;
+
+    border-radius: 50%;
+
+    -webkit-appearance: none;
+    appearance: none;
+
+    background: dodgerblue;
+    cursor: pointer;
+  }
+
+  .slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+
+    background: dodgerblue;
+    cursor: pointer;
+  }
+
+  .breed-filter {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .breed-item {
+    margin: 20px;
+  }
+
+  .breed-item label {
+    padding: 5px;
+
+    border: 1px solid lightgray;
+    border-radius: 5px;
+
+    cursor: pointer;
+  }
+
+  .breed-item label:hover {
+    background-color: plum;
+  }
+
+  .serval-radio:checked ~ .cats_list .cat_box .serval,
+  .coon-radio:checked ~ .cats_list .cat_box .coon,
+  .scot-radio:checked ~ .cats_list .cat_box .scot,
+  .munchkin-radio:checked ~ .cats_list .cat_box .munchkin,
+  .caracal-radio:checked ~ .cats_list .cat_box .caracal {
+    background-color: mediumpurple;
+  }
+
+  section {
+    display: grid;
+    grid-template-areas:
+      'img name'
+      'img short'
+      'long long';
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.3fr 0.8fr 1fr;
+
+    width: 400px;
+    height: 380px;
+  }
+
+  .cats_list .cat_box img {
+    grid-area: img;
+
+    width: 150px;
+    height: 150px;
+    margin: 20px 20px;
+  }
+
+  .cats_list .cat_box a.cat_name {
+    grid-area: name;
+
+    margin-top: 20px;
+  }
+
+  .cats_list .cat_box .cat_short {
+    grid-area: short;
+  }
+
+  .cats_list .cat_box .cat_long {
+    display: flex;
+    grid-area: long;
+
+    padding: 20px 20px 20px 20px;
+
+    border-top: 1px solid lightgray;
+  }
+
+  footer {
+    bottom: 0;
+
+    display: grid;
+
+    grid-area: foot;
+    grid-row-gap: 1em;
+    grid-template-areas: 'mail company';
+    grid-template-columns: 1fr 1fr;
+
+    width: 100%;
+
+    border-top: 1px solid lightgray;
+
+    color: black;
+    font-family: Arial, serif;
+  }
+
+  .email {
+    display: flex;
+    flex-direction: row;
+    grid-area: mail;
+
+    margin: 20px 20px 20px 20px;
+  }
+
+  .email p {
+    margin-right: 0.5em;
+  }
+
+  .email p:before {
+    display: inline-block;
+
+    width: 1em;
+    height: 1em;
+
+    margin-right: 0.4em;
+
+    background-image: url('icons/email.png');
+    background-size: 1em 1em;
+    content: '';
+  }
+
+  .first-mail:before,
+  .second-mail:before {
+    content: none;
+  }
+
+  .second-mail:before {
+    display: inline-block;
+
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: 0.5em;
+
+    margin-left: 0.5em;
+
+    background-image: url('icons/circle.png');
+    background-size: 0.5em 0.5em;
+    content: '';
+  }
+
+  .company {
+    justify-self: right;
+    grid-area: company;
+
+    margin: 20px 20px 20px 20px;
+  }
+}

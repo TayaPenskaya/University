@@ -1,0 +1,25 @@
+.body__footer {
+  position: relative;
+  bottom: 0;
+
+  display: grid;
+
+  grid-area: footer;
+  grid-template-columns: 1fr 1fr;
+
+  width: 100%;
+
+  border-top: gray 1px solid;
+
+  background: white;
+}
+
+.footer__email {
+  padding-left: 1em;
+}
+
+.footer__company {
+  justify-self: end;
+
+  padding-right: 1em;
+}

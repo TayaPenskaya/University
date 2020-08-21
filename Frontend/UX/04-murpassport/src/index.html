@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>04-murpassport</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="body__header.css">
+    <link rel="stylesheet" href="body__footer.css">
+    <link rel="stylesheet" href="./menu-content/body__menu-content.css">
+    <link rel="stylesheet" href="./menu-content/menu/menu.css">
+    <link rel="stylesheet" href="menu-content/content/content.css">
+    <link rel="stylesheet" href="menu-content/content/__data/content__data.css">
+    <link rel="stylesheet" href="menu-content/content/__feedback/content__feedback.css">
+    <link rel="stylesheet" href="menu-content/content/__gallery/content__gallery.css">
+    <link rel="stylesheet" href="menu-content/content/__vaccination/content__vaccination.css">
+  </head>
+  <body>
+    <script type="text/javascript"
+            src="./simulation.js">
+    </script>
+    <header class="body__header">
+      <h1 class="header">
+        Мурпаспорт
+      </h1>
+    </header>
+    <div class="body__menu-content">
+      <div class="menu">
+        <h2 class="menu__header">
+          Меню
+        </h2>
+        <nav class="menu__bar">
+          <ul class="menu__list">
+            <li class="menu__item">
+              <a class="menu__link" href="#data">
+                Данные
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="#vaccination">
+                Прививки
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="#gallery">
+                Галлерея
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="#feedback">
+                Обратная связь
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="content">
+        <div id="data" class="content__data">
+          <h2 class="content__data-title">
+            Данные
+          </h2>
+          <picture>
+            <source type="image/webp" srcset="img/play.webp">
+            <img src="img/play.jpg" alt="Морс" class="content__data-img">
+          </picture>
+          <p class="content__data-text">
+            Имя: Морс
+            <br>
+            Фамилия: Ягодный
+            <br>
+            Порода: Британский
+            <br>
+            Дата рождения: 20.12.2019
+          </p>
+        </div>
+        <div id="vaccination" class="content__vaccination">
+          <h2 class="content__vaccination-title">
+            Прививки
+          </h2>
+          <ol class="content__vaccination-list">
+            <li>
+              От нелюбви к людям.
+            </li>
+            <li>
+              От чрезмерной милости.
+            </li>
+            <li>
+              Для лучшей охоты за мышами.
+            </li>
+          </ol>
+        </div>
+        <div id="gallery" class="content__gallery">
+          <h2 class="content__gallery-title">
+            Галерея
+          </h2>
+          <p class="content__gallery-images">
+            <picture>
+              <source type="image/webp" srcset="img/rest.webp">
+              <img src="img/rest.jpg" alt="Отдыхающий Морс.">
+            </picture>
+            <picture>
+              <source type="image/webp" srcset="img/sleep.webp">
+              <img src="img/sleep.jpg" alt="Спящий Морс.">
+            </picture>
+            <picture>
+              <source type="image/webp" srcset="img/stand.webp">
+              <img src="img/stand.jpg" alt="Наблюдающий Морс.">
+            </picture>
+            <picture>
+              <source type="image/webp" srcset="img/look.webp">
+              <img src="img/look.jpg" alt="Морс увидел что-то.">
+            </picture>
+          </p>
+        </div>
+        <div id="feedback" class="content__feedback">
+          <h2 class="content__feedback-title">
+            Обратная связь
+          </h2>
+          <form action="" class="content__feedback-form">
+            <label for="comment-id">
+              Комментарий:
+              <br>
+              <br>
+              <textarea id="comment-id" class="content__feedback-comment"
+                        cols="30" rows="10" placeholder="Ваш комментарий">
+              </textarea>
+            </label>
+            <label for="email-id">
+              Email:
+              <input id="email-id" class="content__feedback-email" type="email" placeholder="Email">
+            </label>
+            <input name="submit" class="content__feedback-submit" type="submit" value="Отправить">
+          </form>
+        </div>
+      </div>
+    </div>
+    <footer class="body__footer">
+      <p class="footer__email">
+        email: &laquo;
+        <a href="index.html">support@murpassport.ru</a>
+        &raquo;
+      </p>
+      <p class="footer__company">
+        &copy; 2019 OOO &laquo;
+        <a href="index.html">Мурпаспорт</a>
+        &raquo;
+      </p>
+    </footer>
+  </body>
+</html>

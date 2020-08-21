@@ -1,0 +1,6 @@
+.body__menu-content {
+  display: grid;
+  grid-area: menu-content;
+  grid-template-areas: 'menu content';
+  grid-template-columns: 1fr 2fr;
+}

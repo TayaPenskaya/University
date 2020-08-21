@@ -1,0 +1,238 @@
+.html,
+.body {
+  width: 100%;
+  height: 100%;
+}
+
+input[type='radio'],
+input[type='checkbox'] {
+  display: none;
+}
+
+label {
+  cursor: pointer;
+}
+
+.scale-big,
+.scale-original,
+.scale-original1,
+.scale-small,
+.rotate-0,
+.rotate-90,
+.rotate-180,
+.rotate-270,
+.back2,
+.forward2,
+.back1,
+.forward1,
+.back,
+.forward {
+  display: none;
+}
+
+#scale-original:checked ~ .icons .scale-small,
+#scale-small:checked ~ .icons .scale-original1,
+#scale-original1:checked ~ .icons .scale-big,
+#scale-big:checked ~ .icons .scale-original,
+#rotate-0:checked ~ .icons .rotate-90,
+#rotate-90:checked ~ .icons .rotate-180,
+#rotate-180:checked ~ .icons .rotate-270,
+#rotate-270:checked ~ .icons .rotate-0 {
+  display: block;
+}
+
+.container {
+  position: absolute;
+  top: 5%;
+  left: calc(50% - 250px);
+
+  display: flex;
+  flex-direction: column;
+
+  width: 520px;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-around;
+}
+
+svg {
+  width: 48px;
+  height: 48px;
+
+  transform: scale(0.7);
+}
+
+picture {
+  align-self: center;
+
+  margin: 50px;
+
+  transition: all 2s;
+}
+
+.main-img {
+  width: 300px;
+  height: 300px;
+
+  transition: all 2s;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-around;
+
+  font-family: Verdana, sans-serif;
+  font-size: 10px;
+  text-align: center;
+}
+
+.arrow {
+  padding-top: 60px;
+
+  transform: scale(0.5);
+}
+
+.arrow-back {
+  transform: rotate(0.25turn);
+}
+
+.arrow-forward {
+  transform: rotate(0.75turn);
+}
+
+.black-and-white__img {
+  filter: grayscale(100%);
+}
+
+.sepia__img {
+  filter: sepia(100%);
+}
+
+.blue__img {
+  filter: hue-rotate(190deg);
+}
+
+.no-filter__input:checked ~ .filters label .no-filter__text,
+.black-and-white__input:checked ~ .filters label .black-and-white__text,
+.sepia__input:checked ~ .filters label .sepia__text,
+.blue__input:checked ~ .filters label .blue__text,
+.fashion__input:checked ~ .filters label .fashion__text,
+.new__input:checked ~ .filters label .new__text {
+  font-weight: bold;
+}
+
+.black-and-white__input:checked ~ picture .main-img {
+  filter: grayscale(1);
+}
+
+.sepia__input:checked ~ picture .main-img {
+  filter: sepia(1);
+}
+
+.blue__input:checked ~ picture .main-img {
+  filter: hue-rotate(190deg);
+}
+
+#fill-id:checked ~ picture .main-img {
+  width: 200px;
+  height: 200px;
+
+  object-fit: cover;
+}
+
+#scale-original:checked ~ picture,
+#scale-original1:checked ~ picture {
+  transform: scale(1);
+}
+
+#scale-small:checked ~ picture {
+  transform: scale(0.5);
+}
+
+#scale-big:checked ~ picture {
+  transform: scale(1.3);
+}
+
+#rotate-0:checked ~ picture .main-img {
+  transform: rotate(0turn);
+}
+
+#rotate-90:checked ~ picture .main-img {
+  transform: rotate(0.25turn);
+}
+
+#rotate-180:checked ~ picture .main-img {
+  transform: rotate(0.5turn);
+}
+
+#rotate-270:checked ~ picture .main-img {
+  transform: rotate(0.75turn);
+}
+
+#flip-id:checked ~ picture .main-img {
+  transform: scale(-1, 1);
+}
+
+#logo-id:checked ~ .filters {
+  display: none;
+}
+
+#logo-id:checked ~ .icons .rotate,
+#logo-id:checked ~ .icons .flip,
+#logo-id:checked ~ .icons .fill,
+#logo-id:checked ~ .icons .scale {
+  display: none;
+}
+
+.fashion,
+.new {
+  display: none;
+}
+
+#fashion:checked ~ picture .main-img {
+  filter: hue-rotate(270deg);
+}
+
+.fashion__img {
+  filter: hue-rotate(270deg);
+}
+
+#new:checked ~ picture .main-img {
+  filter: hue-rotate(90deg);
+}
+
+.new__img {
+  filter: hue-rotate(90deg);
+}
+
+.end {
+  opacity: 0.5;
+}
+
+#forward2:checked ~ .filters .new,
+#forward2:checked ~ .filters .fashion,
+#forward1:checked ~ .filters .fashion,
+#back2:checked ~ .filters .fashion,
+#back:checked ~ .filters .back,
+#back:checked ~ .filters .forward1,
+#back1:checked ~ .filters .forward1,
+#back1:checked ~ .filters .back,
+#back2:checked ~ .filters .back1,
+#back2:checked ~ .filters .forward1,
+#forward:checked ~ .filters .back,
+#forward1:checked ~ .filters .back1,
+#forward1:checked ~ .filters .forward2,
+#forward2:checked ~ .filters .forward,
+#forward2:checked ~ .filters .back2 {
+  display: block;
+}
+
+#forward2:checked ~ .filters .black-and-white,
+#forward2:checked ~ .filters .no-filter,
+#forward1:checked ~ .filters .no-filter,
+#back2:checked ~ .filters .no-filter,
+#back1:checked ~ .filters .fashion {
+  display: none;
+}

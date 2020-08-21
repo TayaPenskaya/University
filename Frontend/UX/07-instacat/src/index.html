@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Задача «Котограм»</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+      <linearGradient id="lgrad" x1="0%" y1="100%" x2="100%" y2="0%" >
+        <stop offset="0%" style="stop-color:rgb(255,133,25);stop-opacity:1" />
+        <stop offset="100%" style="stop-color:rgb(255,0,255);stop-opacity:1" />
+      </linearGradient>
+      <symbol id="arrow">
+        <path d="M.5 7.401L24.428 31.33 48.357 7.4 41.569.613l-17.14 17.14L7.288.614z"
+              fill-rule="evenodd"/>
+      </symbol>
+      <symbol id="fill">
+        <g>
+          <path d="M8.395 8.395h30.996v30.996H8.395z"/>
+          <path d="M35.946 0v5.166h6.888v6.673H48V0zM5.166
+          5.166h6.673V0H0v11.839h5.166zM42.834 42.834h-6.888V48H48V35.946h-5.166zM5.166
+          35.946H0V48h11.839v-5.166H5.166z"/>
+        </g>
+      </symbol>
+      <symbol id="flip">
+        <g>
+          <path d="M0 29.9l19.084-11.788L0 6.325z"/>
+          <path d="M28.916 18.112L48 29.9V6.325L28.916 18.112zm15.058
+          4.425l-7.163-4.425 7.163-4.424v8.849z"
+                fill-rule="nonzero"/>
+          <path d="M21.398 8.05h5.205v5.175h-5.205zM21.398
+          0h5.205v5.175h-5.205zM21.398 16.1h5.205v5.175h-5.205zM21.398
+          23.575h5.205v5.175h-5.205zM21.398 31.625h5.205V36.8h-5.205z"/>
+        </g>
+      </symbol>
+      <symbol id="logo">
+        <path d="M0 0v48h48V0H0zm24.107 16.782a7.12 7.12 0 0 1 7.11 7.111 7.12 7.12 0 0
+        1-7.11 7.111 7.12 7.12 0 0 1-7.111-7.11 7.12 7.12 0 0 1 7.11-7.112zM6.4
+        5.547h7.253v4.693H6.4V5.547zM41.6 41.6H6.4V24.747h4.225c.443 7.053 6.318
+        12.657 13.482 12.657 7.163 0 13.039-5.604 13.481-12.657H41.6V41.6z"
+              fill-rule="evenodd"/>
+      </symbol>
+      <symbol id="rotate">
+        <path d="M24 48c13.234 0 24-9.765 24-21.753 0-11.99-10.766-21.749-24-21.749-.88
+        0-1.768.046-2.651.136V1.119c0-.452-.308-.863-.761-1.038a1.353 1.353 0 0
+        0-1.355.251l-8.504 7.722c-.484.438-.484 1.138 0 1.583l8.5 7.739c.362.319.886.418
+        1.359.243.453-.177.76-.585.76-1.035v-3.899c.88-.146 1.764-.212 2.651-.212 8.384 0
+        15.207 6.18 15.207 13.774 0 7.593-6.825 13.778-15.207 13.778-8.382
+        0-15.203-6.187-15.203-13.778 0-.616-.553-1.12-1.24-1.12H1.24c-.684 0-1.241.504-1.241
+        1.12C0 38.235 10.774 48 24 48z" fill-rule="evenodd"/>
+      </symbol>
+      <symbol id="scale">
+        <g>
+          <path d="M0 0v48h48V0H0zm6.4 6.4h33.682L6.4 40.227V6.4zm34.56 32.427H25.6v-6.4h15.36v6.4z"
+                fill-rule="nonzero"/>
+          <path d="M24 13.071h-4.375v-4.5h-6.25v4.5H9V19.5h4.375V24h6.25v-4.5H24z"/>
+        </g>
+      </symbol>
+    </svg>
+
+    <div class="container">
+      <input type="checkbox" id="fill-id">
+      <input type="radio" checked name="size" id="scale-original">
+      <input type="radio" name="size" id="scale-small">
+      <input type="radio" name="size" id="scale-original1">
+      <input type="radio" name="size" id="scale-big">
+      <input type="checkbox" id="logo-id">
+      <input type="radio" checked name="rotate" id="rotate-0">
+      <input type="radio" name="rotate" id="rotate-90">
+      <input type="radio" name="rotate" id="rotate-180">
+      <input type="radio" name="rotate" id="rotate-270">
+      <input type="checkbox" id="flip-id">
+      <input type="radio" name="filter" id="no-filter" class="no-filter__input">
+      <input type="radio" name="filter" id="black-and-white" class="black-and-white__input">
+      <input type="radio" name="filter" id="sepia" class="sepia__input">
+      <input type="radio" name="filter" id="blue" class="blue__input">
+      <input type="radio" name="filter" id="fashion" class="fashion__input">
+      <input type="radio" name="filter" id="new" class="new__input">
+
+      <input type="radio" checked name="arrow" id="back">
+      <input type="radio" name="arrow" id="back1">
+      <input type="radio" name="arrow" id="back2">
+      <input type="radio" name="arrow" id="forward1">
+      <input type="radio" name="arrow" id="forward2">
+      <input type="radio" name="arrow" id="forward">
+
+      <div class="icons">
+        <label for="fill-id">
+          <svg class="fill">
+            <use xlink:href="#fill"></use>
+          </svg>
+        </label>
+        <label for="scale-original" class="scale-original">
+          <svg class="scale">
+            <use xlink:href="#scale"></use>
+          </svg>
+        </label>
+        <label for="scale-small" class="scale-small">
+          <svg class="scale">
+            <use xlink:href="#scale"></use>
+          </svg>
+        </label>
+        <label for="scale-original1" class="scale-original1">
+          <svg class="scale">
+            <use xlink:href="#scale"></use>
+          </svg>
+        </label>
+        <label for="scale-big" class="scale-big">
+          <svg class="scale">
+            <use xlink:href="#scale"></use>
+          </svg>
+        </label>
+        <label for="logo-id" class="logo">
+          <svg class="logo">
+            <use xlink:href="#logo" fill="url(#lgrad)"></use>
+          </svg>
+        </label>
+        <label for="rotate-0" class="rotate-0">
+          <svg class="rotate">
+            <use xlink:href="#rotate"></use>
+          </svg>
+        </label>
+        <label for="rotate-90" class="rotate-90">
+          <svg class="rotate">
+            <use xlink:href="#rotate"></use>
+          </svg>
+        </label>
+        <label for="rotate-180" class="rotate-180">
+          <svg class="rotate">
+            <use xlink:href="#rotate"></use>
+          </svg>
+        </label>
+        <label for="rotate-270" class="rotate-270">
+          <svg class="rotate">
+            <use xlink:href="#rotate"></use>
+          </svg>
+        </label>
+        <label for="flip-id">
+          <svg class="flip">
+            <use xlink:href="#flip"></use>
+          </svg>
+        </label>
+      </div>
+
+      <picture>
+        <img src="img/sleep.jpg" alt="Сute kitten" class="main-img">
+        <source srcset="img/sleep.webp">
+      </picture>
+
+      <div class="filters">
+        <label for="back" class="arrow back end">
+          <svg class="arrow-back">
+            <use xlink:href="#arrow"></use>
+          </svg>
+        </label>
+        <label for="back1" class="arrow back1">
+          <svg class="arrow-back">
+            <use xlink:href="#arrow"></use>
+          </svg>
+        </label>
+        <label for="back2" class="arrow back2">
+          <svg class="arrow-back">
+            <use xlink:href="#arrow"></use>
+          </svg>
+        </label>
+        <label for="no-filter" class="no-filter">
+          <p class="no-filter__text">
+            Без фильтров
+          </p>
+          <img src="img/sleep100.jpg" class="no-filter__img" alt="No filter cat">
+        </label>
+        <label for="black-and-white" class="black-and-white">
+          <p class="black-and-white__text">
+            ЧБ
+          </p>
+          <img src="img/sleep100.jpg" class="black-and-white__img" alt="Black%White cat">
+        </label>
+        <label for="sepia">
+          <p class="sepia__text">
+            Старинный
+          </p>
+          <img src="img/sleep100.jpg" class="sepia__img" alt="Sepia cat">
+        </label>
+        <label for="blue">
+          <p class="blue__text">
+            Загадочный
+          </p>
+          <img src="img/sleep100.jpg" class="blue__img" alt="Blue cat">
+        </label>
+        <label for="fashion" class="fashion">
+          <p class="fashion__text">
+            Модный
+          </p>
+          <img src="img/sleep100.jpg" class="fashion__img" alt="Fashion cat">
+        </label>
+        <label for="new" class="new">
+          <p class="new__text">
+            Новинка
+          </p>
+          <img src="img/sleep100.jpg" class="new__img" alt="New filter">
+        </label>
+        <label for="forward" class="arrow forward end">
+          <svg class="arrow-forward">
+            <use xlink:href="#arrow"></use>
+          </svg>
+        </label>
+        <label for="forward1" class="arrow forward1">
+          <svg class="arrow-forward">
+            <use xlink:href="#arrow"></use>
+          </svg>
+        </label>
+        <label for="forward2" class="arrow forward2">
+          <svg class="arrow-forward">
+            <use xlink:href="#arrow"></use>
+          </svg>
+        </label>
+      </div>
+    </div>
+
+  </body>
+</html>

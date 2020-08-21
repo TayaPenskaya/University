@@ -1,0 +1,163 @@
+* {
+  /* избавляемся от отступов */
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  cursor: pointer;
+}
+
+.cats_title {
+  /* фиксация заголовка в одном месте - relative + fixed position*/
+  position: sticky;
+  top: 0;
+
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  border-bottom: 1px solid lightgray;
+
+  background: white;
+
+  /* задаем все внутренности title */
+  color: black;
+  font-family: 'PT SansNarrow', serif;
+  font-size: 48px;
+  text-align: center;
+}
+
+.switch {
+  display: none;
+}
+
+.switch_label {
+  width: 50px;
+
+  height: 50px;
+
+  margin: 2rem 0 0 3rem;
+
+  content: url('icons/vert.png');
+
+  cursor: pointer;
+}
+
+.switch_label:hover {
+  box-shadow: 0 0 10px 3px darkgrey;
+}
+
+.switch:checked + .switch_label {
+  content: url('icons/list.png');
+}
+
+.cats_list .cat_box {
+  display: inline-block;
+
+  overflow: hidden;
+
+  width: 400px;
+  height: 555px;
+
+  margin: 2rem 0 2rem 3rem;
+
+  border: 1px solid lightgray;
+
+  background: white;
+
+  cursor: pointer;
+
+  text-align: left;
+  text-overflow: ellipsis;
+}
+
+.cats_list .cat_box:hover {
+  box-shadow: 4px 4px 10px 3px darkgrey;
+}
+
+.cats_list .cat_box img {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.cats_list .cat_box img:hover {
+  box-shadow: 0 9px 10px -4px deepskyblue;
+}
+
+.cats_list .cat_box .cat_name {
+  margin: 20px 20px;
+
+  transition: all 0.6s;
+
+  color: black;
+  font-family: Arial, serif;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.cats_list .cat_box .cat_name:hover {
+  color: deepskyblue;
+}
+
+.cats_list .cat_box .cat_name:visited {
+  color: purple;
+}
+
+.cats_list .cat_box p {
+  margin: 10px 20px 10px 20px;
+
+  color: dimgrey;
+  font-family: Arial, serif;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.switch:checked ~ .cats_list .cat_box {
+  display: block;
+
+  width: 600px;
+  height: 800px;
+}
+
+.cats_list .cat_box .cat_long {
+  display: none;
+}
+
+.switch:checked ~ .cats_list .cat_box .cat_long {
+  display: inline;
+}
+
+.switch:checked ~ .cats_list .cat_box .cat_short {
+  display: none;
+}
+
+footer {
+  bottom: 0;
+
+  display: table;
+
+  width: 100%;
+
+  border-top: 1px solid lightgray;
+
+  color: black;
+  font-family: Arial, serif;
+  font-size: 18px;
+}
+
+footer .email,
+.company {
+  display: table-cell;
+
+  width: 50%;
+
+  padding: 1rem 2rem 1rem 2rem;
+
+  vertical-align: top;
+}
+
+footer p.company {
+  text-align: right;
+}

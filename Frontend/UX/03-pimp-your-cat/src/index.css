@@ -1,0 +1,161 @@
+* {
+  font-family: Verdana, sans-serif;
+}
+
+.form {
+  display: grid;
+  align-items: center;
+  grid-template-areas: 'header img' 'button img';
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+
+  width: 800px;
+
+  padding: 10px;
+
+  border: lightgrey 2px solid;
+  border-radius: 10px;
+}
+
+.form__header {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  grid-area: header;
+
+  margin: 10px;
+}
+
+.form__close-img {
+  display: flex;
+  flex-direction: column;
+  grid-area: img;
+}
+
+#form__close-id {
+  display: none;
+}
+
+.form__close {
+  align-self: flex-end;
+
+  margin-bottom: 3em;
+}
+
+.form__close:before {
+  padding: 3px 10px 5px 10px;
+
+  border: 2px lightgrey solid;
+  border-radius: 50%;
+
+  color: lightgrey;
+  content: 'x';
+  cursor: pointer;
+}
+
+#form__close-id:checked + .form__close:before {
+  background: gold;
+}
+
+.form__img {
+  justify-self: center;
+
+  width: 90%;
+
+  margin: 10px;
+}
+
+.form__button {
+  display: flex;
+  flex-direction: column;
+  grid-area: button;
+
+  margin: 10px;
+}
+
+.form__email,
+.form__spam,
+.form__submit,
+.form__choice {
+  margin: 0.5em 0 0.5em 0;
+
+  font-size: 1.1em;
+}
+
+.form__age-weight {
+  margin: 0;
+  padding: 0;
+
+  border: 0 none;
+}
+
+.form__age-weight input {
+  margin: 0.5em 0 0.5em 0;
+
+  background: aliceblue;
+  font-size: 1.1em;
+}
+
+input[type='radio'] {
+  display: none;
+}
+
+input[type='radio']:checked + label {
+  background: gold;
+}
+
+.form__choice {
+  display: grid;
+  flex-direction: row;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  width: 100%;
+}
+
+.form__choice-lose {
+  grid-column-start: 1;
+}
+
+.form__choice-gain {
+  grid-column-start: 3;
+}
+
+.form__choice-lose,
+.form__choice-any,
+.form__choice-gain {
+  padding: 1em;
+
+  border: darkgrey 1px solid;
+
+  background: aliceblue;
+  cursor: pointer;
+
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.form__choice-any {
+  grid-column-start: 2;
+
+  border-right: 0;
+  border-left: 0;
+}
+
+.form__choice-lose:hover,
+.form__choice-any:hover,
+.form__choice-gain:hover {
+  background: lightgrey;
+}
+
+.form__email {
+  background: aliceblue;
+}
+
+.form__submit {
+  padding: 0.5em;
+
+  border-radius: 10px;
+
+  background: gold;
+  cursor: pointer;
+}

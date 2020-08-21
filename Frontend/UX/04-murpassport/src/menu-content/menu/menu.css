@@ -1,0 +1,36 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  grid-area: menu;
+
+  margin: 0;
+
+  border-right: gray 1px solid;
+}
+
+.menu__header {
+  width: 100%;
+
+  margin: 0;
+  padding: 1em 0 1em 0;
+
+  border-bottom: gray 1px solid;
+
+  background: lavender;
+
+  font-size: 2em;
+
+  text-align: center;
+}
+
+.menu__bar {
+  align-self: start;
+}
+
+.menu__bar li {
+  margin: 1em;
+
+  font-size: 1.5em;
+}
